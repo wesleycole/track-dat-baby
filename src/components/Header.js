@@ -1,0 +1,57 @@
+import React from 'react';
+import styled from 'styled-components';
+import emoji from 'react-easy-emoji';
+import LoginAuth from './LoginAuth';
+
+const SiteHeader = styled.header`
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    padding: 1em;
+`;
+
+const SiteTitle = styled.h1`
+    align-items: center;
+    display: flex;
+    color: #333;
+    margin: 0;
+`;
+
+const SiteTitleText = styled.span`
+    font-size: 20px;
+    margin-left: 10px;
+`;
+
+const Buttons = styled.div`margin-left: auto;`;
+
+const LogoutButton = styled.button`
+    background: none;
+    border: none;
+    box-shadow: none;
+`;
+
+const clientId = 'O4r7bgASfCN-V4eeGCl3v5C1zzP-7mRn';
+const domain = 'trackdatbaby.auth0.com';
+
+const Header = props => {
+    let button = <LoginAuth clientId={clientId} domain={domain} />;
+    if (props.isLoggedIn()) {
+        button = (
+            <LogoutButton onClick={props.handleLogout}>Log out</LogoutButton>
+        );
+    }
+
+    return (
+        <SiteHeader>
+            <SiteTitle>
+                {emoji('👶')}
+                <SiteTitleText>Track Dat Baby</SiteTitleText>
+            </SiteTitle>
+            <Buttons>
+                {button}
+            </Buttons>
+        </SiteHeader>
+    );
+};
+
+export default Header;
