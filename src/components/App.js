@@ -2,7 +2,11 @@ import React from 'react';
 import LoginAuth from './LoginAuth';
 import { graphql, gql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 import Header from './Header';
+import AddEntry from './AddEntry';
+
+const Main = styled.div`padding: 1em;`;
 
 class App extends React.Component {
     static propTypes = {
@@ -19,9 +23,25 @@ class App extends React.Component {
         return this.props.data.user;
     };
 
+    renderLoggedIn = () => {
+        return <p>Logged In</p>;
+    };
+
+    renderLoggedOut = () => {
+        return <p>Logged Out</p>;
+    };
+
     render() {
         return (
-            <Header isLoggedIn={this._isLoggedIn} handleLogout={this._logout} />
+            <div>
+                <Header
+                    isLoggedIn={this._isLoggedIn}
+                    handleLogout={this._logout}
+                />
+                <Main>
+                    <AddEntry {...this.props} />
+                </Main>
+            </div>
         );
     }
 }

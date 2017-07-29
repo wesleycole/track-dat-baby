@@ -26,8 +26,13 @@ const Buttons = styled.div`margin-left: auto;`;
 
 const LogoutButton = styled.button`
     background: none;
+    background-color: rgba(23, 188, 184, 0.5);
     border: none;
+    border-radius: 3px;
     box-shadow: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
 `;
 
 const clientId = 'O4r7bgASfCN-V4eeGCl3v5C1zzP-7mRn';
