@@ -26,12 +26,11 @@ const Emoji = styled.span`
     margin-right: 10px;
 `;
 
-const AddFeed = ({ mutate }) => {
+const AddFeed = (props, { mutate }) => {
+    console.log(props);
     const handleClick = e => {
         e.preventDefault();
-        mutate({
-            variables: { type: 'Breast' }
-        });
+        props.handleOpenModal();
     };
 
     return (

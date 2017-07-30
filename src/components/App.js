@@ -1,10 +1,10 @@
 import React from 'react';
-import LoginAuth from './LoginAuth';
 import { graphql, gql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
 import AddEntry from './AddEntry';
+import EntriesListWithData from './EntriesList';
 
 const Main = styled.div`padding: 1em;`;
 
@@ -40,6 +40,7 @@ class App extends React.Component {
                 />
                 <Main>
                     <AddEntry {...this.props} />
+                    <EntriesListWithData />
                 </Main>
             </div>
         );

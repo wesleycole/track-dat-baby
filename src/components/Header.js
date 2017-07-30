@@ -25,8 +25,7 @@ const SiteTitleText = styled.span`
 const Buttons = styled.div`margin-left: auto;`;
 
 const LogoutButton = styled.button`
-    background: none;
-    background-color: rgba(23, 188, 184, 0.5);
+    background: linear-gradient(to right, #ff5f6d, #ffc371);
     border: none;
     border-radius: 3px;
     box-shadow: none;

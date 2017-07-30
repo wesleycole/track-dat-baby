@@ -10,3 +10,11 @@ body {
     color: #333;
     text-decoration: none;
 }
+
+.rc-time-picker-input {
+    border-color: #eee;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 20px;
+    height: 40px;
+}
