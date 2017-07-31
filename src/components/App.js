@@ -3,10 +3,7 @@ import { graphql, gql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
-import AddEntry from './AddEntry';
-import EntriesListWithData from './EntriesList';
-
-const Main = styled.div`padding: 1em;`;
+import Main from './Main';
 
 class App extends React.Component {
     static propTypes = {
@@ -28,20 +25,22 @@ class App extends React.Component {
     };
 
     renderLoggedOut = () => {
-        return <p>Logged Out</p>;
+        return <div />;
     };
 
     render() {
+        let output = <div>Login</div>;
+
+        if (this._isLoggedIn()) {
+            output = <Main />;
+        }
         return (
             <div>
                 <Header
                     isLoggedIn={this._isLoggedIn}
                     handleLogout={this._logout}
                 />
-                <Main>
-                    <AddEntry {...this.props} />
-                    <EntriesListWithData />
-                </Main>
+                {output}
             </div>
         );
     }

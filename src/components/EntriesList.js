@@ -25,6 +25,8 @@ const EntriesList = ({ data: { loading, error, user } }) => {
     );
 };
 
+const now = new Date();
+
 export const entriesListQuery = gql`
     query {
         user {
@@ -33,10 +35,12 @@ export const entriesListQuery = gql`
                 id
                 parentType
                 childType
+                time
             }
         }
     }
 `;
+
 const EntriesListWithData = graphql(entriesListQuery)(EntriesList);
 
 export default EntriesListWithData;

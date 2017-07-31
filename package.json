@@ -12,6 +12,7 @@
         "moment": "^2.18.1",
         "rc-time-picker": "^2.4.1",
         "react": "^15.6.1",
+        "react-addons-css-transition-group": "^15.6.0",
         "react-apollo": "^1.4.8",
         "react-chartjs": "^0.8.0",
         "react-dom": "^15.6.1",

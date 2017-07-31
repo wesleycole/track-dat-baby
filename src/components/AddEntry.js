@@ -64,29 +64,52 @@ const ParentButtons = styled.div`
 
 const TypeButton = styled.button`
     background: #fff;
-    border: 1px solid #eee;
+    border: 1px solid ${props => (props.selected ? '#ff5f6d' : '#eee')};
     border-radius: 3px;
     box-shadow: none;
+    color: ${props => (props.selected ? '#ff5f6d' : '#333')};
     flex: 1;
     font-size: 24px;
     margin-right: 0.5em;
     outline: none;
     padding: 10px 10px;
+    transition: all 0.1s ease-in-out;
 
     &:last-child {
         margin-right: 0;
     }
 `;
 
+const EditTime = styled.button`
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #ccc;
+    font-size: 14px;
+    margin-top: 1em;
+`;
+
+const ModalTitle = styled.h3`
+    margin: 0;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+`;
+
+const ModalDescription = styled.p`
+    color: #cecece;
+    margin-top: 0;
+`;
+
 const Form = styled.form`margin-top: 1em;`;
 
 class AddEntry extends React.Component {
     state = {
-        modalIsOpen: true,
+        modalIsOpen: false,
         parentType: '',
         childType: '',
         editTime: false,
-        time: moment()
+        time: moment(),
+        parentSelected: false
     };
 
     openModal = () => {
@@ -116,17 +139,11 @@ class AddEntry extends React.Component {
     };
 
     saveEntry = e => {
-        let enteredTime = new Date();
-
-        if (this.state.enteredTime != null) {
-            enteredTime = this.state.enteredTime;
-        }
-
         this.props.mutate({
             variables: {
                 parentType: this.state.parentType,
                 childType: this.state.childType,
-                time: enteredTime,
+                time: this.state.time,
                 userId: this.props.data.user.id
             },
             update: (store, { data: { createEntry } }) => {
@@ -137,18 +154,23 @@ class AddEntry extends React.Component {
         });
 
         this.setState({
-            modalIsOpen: false
+            modalIsOpen: false,
+            parentType: '',
+            childType: '',
+            time: moment(),
+            editTime: false
         });
     };
 
     render() {
-        const { parentType } = this.state;
+        const { parentType, childType } = this.state;
+
         let childOutput = '';
         if (parentType === 'diaper') {
             childOutput = (
                 <RadioGroup
                     name="foo"
-                    value={this.state.childType}
+                    value={childType}
                     choices={[
                         { value: 'poop', label: 'Poop' },
                         { value: 'pee', label: 'Pee' },
@@ -161,7 +183,7 @@ class AddEntry extends React.Component {
             childOutput = (
                 <RadioGroup
                     name="foo"
-                    value={this.state.childType}
+                    value={childType}
                     choices={[
                         { value: 'breast', label: 'Breast' },
                         { value: 'bottle', label: 'Bottle' }
@@ -172,9 +194,9 @@ class AddEntry extends React.Component {
         }
 
         let time = (
-            <button onClick={this.showTimePicker}>
+            <EditTime onClick={this.showTimePicker}>
                 {emoji('⏰')} Edit the Time
-            </button>
+            </EditTime>
         );
 
         if (this.state.editTime) {
@@ -199,14 +221,24 @@ class AddEntry extends React.Component {
                     contentLabel="Entry Modal"
                 >
                     <ModalContent>
+                        <ModalTitle>Track yo baby!</ModalTitle>
+                        <ModalDescription>
+                            Is your little munchkin eating or smellin'?
+                        </ModalDescription>
                         <ParentButtons>
                             <TypeButton
                                 onClick={() => this.showChildType('diaper')}
+                                selected={
+                                    this.state.parentType === 'diaper' && true
+                                }
                             >
                                 {emoji('💩')}
                             </TypeButton>
                             <TypeButton
                                 onClick={() => this.showChildType('feed')}
+                                selected={
+                                    this.state.parentType === 'feed' && true
+                                }
                             >
                                 {emoji('🍼')}
                             </TypeButton>

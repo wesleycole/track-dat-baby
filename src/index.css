@@ -11,10 +11,29 @@ body {
     text-decoration: none;
 }
 
+.rc-time-picker {
+    margin-top: 1em;
+}
+
 .rc-time-picker-input {
     border-color: #eee;
     border-radius: 3px;
-    font-size: 14px;
-    padding: 20px;
-    height: 40px;
+}
+
+.fade-enter {
+    opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.fade-leave {
+    opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
 }
