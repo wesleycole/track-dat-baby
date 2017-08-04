@@ -5,9 +5,11 @@ import styled from 'styled-components';
 
 const Container = styled.div`padding: 1em;`;
 
-const Main = () => {
+const Main = props => {
     <Container>
-        <AddEntry {...this.props} />
+        <AddEntry {...props} />
         <EntriesListWithData />
     </Container>;
 };
+
+export default Main;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
+import Timeline from './timeline/Timeline';
 
 const EntriesList = ({ data: { loading, error, user } }) => {
     if (loading) {
@@ -13,15 +14,9 @@ const EntriesList = ({ data: { loading, error, user } }) => {
         );
     }
     return (
-        <ul>
-            {user &&
-                user.entries.map(entry =>
-                    <li key={entry.id}>
-                        {entry.parentType}
-                        {entry.childType}
-                    </li>
-                )}
-        </ul>
+        <div>
+            <Timeline entries={user.entries} />
+        </div>
     );
 };
 
