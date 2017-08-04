@@ -1,6 +1,10 @@
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
 import Timeline from './timeline/Timeline';
+import Reports from './reports/Reports';
+import styled from 'styled-components';
+
+const Container = styled.div`display: flex;`;
 
 const EntriesList = ({ data: { loading, error, user } }) => {
     if (loading) {
@@ -14,9 +18,10 @@ const EntriesList = ({ data: { loading, error, user } }) => {
         );
     }
     return (
-        <div>
+        <Container>
             <Timeline entries={user.entries} />
-        </div>
+            <Reports entries={user.entries} />
+        </Container>
     );
 };
 

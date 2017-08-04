@@ -6,6 +6,7 @@ const TimelineContainer = styled.ul`
     list-style: none;
     margin: 2em;
     padding: 0;
+    width: 40%;
 `;
 
 const Timeline = props => {
