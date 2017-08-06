@@ -17,6 +17,7 @@ const EntriesList = ({ data: { loading, error, user } }) => {
             </p>
         );
     }
+
     return (
         <Container>
             <Timeline entries={user.entries} />
@@ -25,13 +26,11 @@ const EntriesList = ({ data: { loading, error, user } }) => {
     );
 };
 
-const now = new Date();
-
 export const entriesListQuery = gql`
-    query {
+    query paginateEntries($startDate: DateTime, $endDate: DateTime) {
         user {
             id
-            entries {
+            entries(filter: { time_lte: $endDate, time_gte: $startDate }) {
                 id
                 parentType
                 childType

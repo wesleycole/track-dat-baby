@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import Header from './Header';
 import AddEntry from './AddEntry';
 import EntriesListWithData from './EntriesList';
+import LoginAuth from './LoginAuth';
+import moment from 'moment';
 
 const Container = styled.div`padding: 1em;`;
 
@@ -12,6 +14,10 @@ class App extends React.Component {
     static propTypes = {
         history: React.PropTypes.object.isRequired,
         data: React.PropTypes.object.isRequired
+    };
+
+    state = {
+        date: moment()
     };
 
     _logout = () => {
@@ -23,25 +29,51 @@ class App extends React.Component {
         return this.props.data.user;
     };
 
-    renderLoggedIn = () => {
-        return <p>Logged In</p>;
+    _goBack = () => {
+        this.setState({
+            date: this.state.date.subtract(1, 'days')
+        });
     };
 
-    renderLoggedOut = () => {
-        return <div />;
+    _goForward = () => {
+        this.setState({
+            date: this.state.date.add(1, 'days')
+        });
+    };
+
+    _goToToday = () => {
+        this.setState({
+            date: moment()
+        });
     };
 
     render() {
+        console.log(this.state);
+        let content = <LoginAuth />;
+
+        if (this._isLoggedIn()) {
+            content = (
+                <Container>
+                    <AddEntry {...this.props} />
+                    <div>
+                        <button onClick={this._goBack}>Prev</button>
+                        <button onClick={this._goToToday}>Today</button>
+                        <button onClick={this._goForward}>Next</button>
+                    </div>
+                    <EntriesListWithData
+                        startDate={this.state.date.startOf('day').format()}
+                        endDate={this.state.date.endOf('day').format()}
+                    />
+                </Container>
+            );
+        }
         return (
             <div>
                 <Header
                     isLoggedIn={this._isLoggedIn}
                     handleLogout={this._logout}
                 />
-                <Container>
-                    <AddEntry {...this.props} />
-                    <EntriesListWithData />
-                </Container>
+                {content}
             </div>
         );
     }

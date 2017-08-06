@@ -1,20 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`margin: 2em;`;
+const Container = styled.div``;
 
 const Counts = styled.div`display: flex;`;
 
 const Count = styled.div`
-    font-size: 32px;
+    align-items: center;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    color: #ffc371;
+    display: flex;
+    font-size: 64px;
     font-weight: bold;
+    justify-content: center;
+    margin-right: 0.5em;
+    padding: 20px;
+    height: 150px;
+    width: 150px;
 `;
 
 const CountLabel = styled.span`
     color: #ccc;
     display: block;
     font-size: 14px;
-    margin-right: 2em;
     text-transform: uppercase;
 `;
 
@@ -36,12 +45,16 @@ const Reports = props => {
         <Container>
             <Counts>
                 <Count>
-                    {numDiapers}
-                    <CountLabel>Diapers</CountLabel>
+                    <div>
+                        {numDiapers}
+                        <CountLabel>Diapers</CountLabel>
+                    </div>
                 </Count>
                 <Count>
-                    {numFeeds}
-                    <CountLabel>Feeds</CountLabel>
+                    <div>
+                        {numFeeds}
+                        <CountLabel>Feeds</CountLabel>
+                    </div>
                 </Count>
             </Counts>
         </Container>

@@ -147,9 +147,11 @@ class AddEntry extends React.Component {
                 userId: this.props.data.user.id
             },
             update: (store, { data: { createEntry } }) => {
-                const data = store.readQuery({ query: entriesListQuery });
-                data.user.entries.push(createEntry);
-                store.writeQuery({ query: entriesListQuery, data });
+                const data = store.readQuery({
+                    query: entriesListQuery
+                });
+                data.user.entries.push.push(createEntry);
+                store.writeQuery({ query: entriesListQuery, data: data });
             }
         });
 

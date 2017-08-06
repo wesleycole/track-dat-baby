@@ -34,11 +34,8 @@ const LogoutButton = styled.button`
     padding: 5px 10px;
 `;
 
-const clientId = 'O4r7bgASfCN-V4eeGCl3v5C1zzP-7mRn';
-const domain = 'trackdatbaby.auth0.com';
-
 const Header = props => {
-    let button = <LoginAuth clientId={clientId} domain={domain} />;
+    let button = <LoginAuth />;
     if (props.isLoggedIn()) {
         button = (
             <LogoutButton onClick={props.handleLogout}>Log out</LogoutButton>

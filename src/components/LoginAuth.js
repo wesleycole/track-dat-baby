@@ -3,6 +3,9 @@ import Auth0Lock from 'auth0-lock';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
+const clientId = 'O4r7bgASfCN-V4eeGCl3v5C1zzP-7mRn';
+const domain = 'trackdatbaby.auth0.com';
+
 const LoginButton = styled.button`
     background: linear-gradient(to right, #ff5f6d, #ffc371);
     border: none;
@@ -17,12 +20,10 @@ class LoginAuth0 extends Component {
     constructor(props) {
         super(props);
 
-        this._lock = new Auth0Lock(props.clientId, props.domain);
+        this._lock = new Auth0Lock(clientId, domain);
     }
 
     static propTypes = {
-        clientId: PropTypes.string.isRequired,
-        domain: PropTypes.string.isRequired,
         history: PropTypes.object.isRequired
     };
 
