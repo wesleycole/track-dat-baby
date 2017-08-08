@@ -42,7 +42,7 @@ const InlineButton = styled.button`
 
 const Timeline = props => {
     const { date, entries } = props;
-    console.log(date);
+
     if (entries.length) {
         return (
             <TimelineContainer>
@@ -58,7 +58,7 @@ const Timeline = props => {
                     .reverse()}
             </TimelineContainer>
         );
-    } else if (date.format('MM Do YY') != moment().format('MM Do YY')) {
+    } else if (date.format('MM Do YY') !== moment().format('MM Do YY')) {
         return (
             <NoEntries>
                 <Point>

@@ -49,18 +49,12 @@ const Time = styled.div`
 `;
 
 const TimelineItem = props => {
-    const { i, entry, length } = props;
+    const { entry } = props;
     let icon = emoji('💩');
 
     if (entry.parentType === 'feed') {
         icon = emoji('🍼');
     }
-
-    const type = entry.parentType
-        .toLowerCase()
-        .replace(/\b[a-z]/g, function(letter) {
-            return letter.toUpperCase();
-        });
 
     const child = entry.childType
         .toLowerCase()

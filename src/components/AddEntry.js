@@ -100,8 +100,6 @@ const ModalDescription = styled.p`
     margin-top: 0;
 `;
 
-const Form = styled.form`margin-top: 1em;`;
-
 class AddEntry extends React.Component {
     state = {
         modalIsOpen: false,
