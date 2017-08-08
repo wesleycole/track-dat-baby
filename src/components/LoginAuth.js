@@ -16,6 +16,10 @@ const LoginButton = styled.button`
     padding: 5px 10px;
 `;
 
+const authOptions = {
+    allowedConnections: ['twitter', 'facebook', 'linkedin']
+};
+
 class LoginAuth0 extends Component {
     constructor(props) {
         super(props);

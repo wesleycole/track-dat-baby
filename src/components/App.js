@@ -125,6 +125,8 @@ class App extends React.Component {
                     <EntriesListWithData
                         startDate={this.state.date.startOf('day').format()}
                         endDate={this.state.date.endOf('day').format()}
+                        date={this.state.date}
+                        goToToday={this._goToToday}
                     />
                 </Container>
             );

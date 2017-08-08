@@ -7,22 +7,22 @@ import moment from 'moment';
 
 const Container = styled.div`display: flex;`;
 
-const EntriesList = ({ data: { loading, error, user } }) => {
-    if (loading) {
+const EntriesList = props => {
+    if (props.data.loading) {
         return <p>Loading ...</p>;
     }
-    if (error) {
+    if (props.data.error) {
         return (
             <p>
-                {error.message}
+                {props.data.error.message}
             </p>
         );
     }
 
     return (
         <Container>
-            <Timeline entries={user.entries} />
-            <Reports entries={user.entries} />
+            <Timeline {...props} entries={props.data.user.entries} />
+            <Reports entries={props.data.user.entries} />
         </Container>
     );
 };
