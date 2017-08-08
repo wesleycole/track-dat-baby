@@ -6,13 +6,13 @@ import moment from 'moment';
 const Item = styled.li`
     list-style: none;
     margin: 0;
-    padding: 0 0 20px 20px;
+    padding: 0 0 40px 30px;
     position: relative;
 `;
 
 const Tail = styled.div`
     border-left: 2px solid #e9e9e9;
-    height: 100%;
+    height: ${props => (props.last ? '0' : '100%')};
     left: 5px;
     position: absolute;
     top: 0;
@@ -21,11 +21,11 @@ const Tail = styled.div`
 const Head = styled.div`
     border: 0;
     border-radius: 0;
-    font-size: 20px;
+    font-size: 32px;
     height: auto;
     left: -13px;
     line-height: 1;
-    margin-top: 6px;
+    margin-top: 11px;
     padding: 3px 0;
     position: absolute;
     text-align: center;
@@ -48,8 +48,10 @@ const Time = styled.div`
     text-transform: none;
 `;
 
+const Edit = styled.div``;
+
 const TimelineItem = props => {
-    const { entry } = props;
+    const { entry, last } = props;
     let icon = emoji('💩');
 
     if (entry.parentType === 'feed') {
@@ -66,7 +68,7 @@ const TimelineItem = props => {
 
     return (
         <Item>
-            <Tail />
+            <Tail last={last} />
             <Head>
                 {icon}
             </Head>
@@ -75,6 +77,9 @@ const TimelineItem = props => {
                 <Time>
                     {time}
                 </Time>
+                <Edit>
+                    {emoji('✏️')}
+                </Edit>
             </Content>
         </Item>
     );

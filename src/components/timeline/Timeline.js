@@ -53,6 +53,7 @@ const Timeline = props => {
                             key={entry.id}
                             length={entries.length}
                             entry={entry}
+                            last={key === 0}
                         />
                     )
                     .reverse()}
