@@ -68,10 +68,7 @@ const TimelineItem = props => {
             return letter.toUpperCase();
         });
 
-    const time =
-        i > length - 2
-            ? moment(entry.time).fromNow()
-            : moment(entry.time).format('hh:mm a');
+    const time = moment(entry.time).format('hh:mm a');
 
     return (
         <Item>

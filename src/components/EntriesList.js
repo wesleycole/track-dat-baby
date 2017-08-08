@@ -3,6 +3,7 @@ import { gql, graphql } from 'react-apollo';
 import Timeline from './timeline/Timeline';
 import Reports from './reports/Reports';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const Container = styled.div`display: flex;`;
 
