@@ -8,7 +8,6 @@ import {
     ApolloProvider,
     createNetworkInterface
 } from 'react-apollo';
-import 'tachyons';
 import './index.css';
 
 const networkInterface = createNetworkInterface({

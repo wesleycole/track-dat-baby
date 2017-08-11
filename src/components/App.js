@@ -6,6 +6,7 @@ import Header from './Header';
 import AddEntry from './AddEntry';
 import EntriesListWithData from './EntriesList';
 import LoginAuth from './LoginAuth';
+import Welcome from './Welcome';
 import moment from 'moment';
 
 const Container = styled.div`padding: 1em;`;
@@ -91,7 +92,7 @@ class App extends React.Component {
     };
 
     render() {
-        let content = <LoginAuth />;
+        let content = <Welcome />;
 
         const today =
             this.state.date.format('MMM Do YY') ===
