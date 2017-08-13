@@ -1,86 +1,58 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import TimelineItem from './TimelineItem';
-import emoji from 'react-easy-emoji';
-import moment from 'moment';
+import React from "react";
+import styled from "styled-components";
+import TimelineItem from "./TimelineItem";
+import NoEntriesToday from "./NoEntries";
+import PastDate from "./PastDate";
+import moment from "moment";
+import emoji from "react-easy-emoji";
+import { TimelineContainer } from "./styles";
 
-const bounce = keyframes`
-    0%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-40px);
-    }
-`;
-
-const NoEntries = styled.div`width: 40%;`;
-
-const Point = styled.div`font-size: 64px;`;
-
-const PointAnimated = styled.div`
-    animation: ${bounce} 2s linear infinite;
-    font-size: 64px;
-`;
-
-const TimelineContainer = styled.ul`
-    list-style: none;
-    margin: 2em;
-    padding: 0;
-    width: 40%;
-`;
-
-const InlineButton = styled.button`
-    background: none;
-    border: none;
-    box-shadow: none;
-    color: #ff5f6d;
-    cursor: pointer;
-    font-weight: bold;
-    padding: 0;
-    text-decoration: underline;
-`;
-
-const Timeline = props => {
-    const { date, entries } = props;
-
-    if (entries.length) {
-        return (
-            <TimelineContainer>
-                {entries
-                    .map((entry, key) =>
-                        <TimelineItem
-                            i={key}
-                            key={entry.id}
-                            length={entries.length}
-                            entry={entry}
-                            last={key === 0}
-                        />
-                    )
-                    .reverse()}
-            </TimelineContainer>
-        );
-    } else if (date.format('MM Do YY') !== moment().format('MM Do YY')) {
-        return (
-            <NoEntries>
-                <Point>
-                    {emoji('🚫')}
-                </Point>
-                <h2>This date has passed.</h2>
-                <InlineButton onClick={props.goToToday}>
-                    Go to today.
-                </InlineButton>
-            </NoEntries>
-        );
-    } else {
-        return (
-            <NoEntries>
-                <PointAnimated>
-                    {emoji('👆')}
-                </PointAnimated>
-                <h2>Add your first entry for today.</h2>
-            </NoEntries>
-        );
-    }
+const customStyles = {
+	content: {
+		border: "1px solid #eee",
+		boxShadow: "4px 4px 20px rgba(0,0,0,0.1)",
+		top: "50%",
+		left: "50%",
+		right: "auto",
+		bottom: "auto",
+		marginRight: "-50%",
+		padding: 0,
+		transform: "translate(-50%, -50%)",
+		width: 320
+	},
+	overlay: {
+		backgroundColor: "rgba(255, 255, 255, 0.7)"
+	}
 };
+
+class Timeline extends React.Component {
+	state = {};
+
+	render() {
+		console.log(this.state);
+		const { date, entries } = this.props;
+		if (entries.length) {
+			return (
+				<TimelineContainer>
+					{entries
+						.map((entry, key) =>
+							<TimelineItem
+								i={key}
+								key={entry.id}
+								length={entries.length}
+								entry={entry}
+								last={key === 0}
+							/>
+						)
+						.reverse()}
+				</TimelineContainer>
+			);
+		} else if (date.format("MM Do YY") !== moment().format("MM Do YY")) {
+			return <PastDate />;
+		} else {
+			return <NoEntriesToday {...this.props} />;
+		}
+	}
+}
 
 export default Timeline;

@@ -1,25 +1,25 @@
-import React from 'react';
-import { graphql, gql } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
-import Header from './Header';
-import AddEntry from './AddEntry';
-import EntriesListWithData from './EntriesList';
-import LoginAuth from './LoginAuth';
-import Welcome from './Welcome';
-import moment from 'moment';
+import React from "react";
+import { graphql, gql } from "react-apollo";
+import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+import Header from "./Header";
+import AddEntry from "./AddEntry";
+import EntriesListWithData from "./EntriesList";
+import LoginAuth from "./LoginAuth";
+import Welcome from "./Welcome";
+import moment from "moment";
 
 const Container = styled.div`padding: 1em;`;
 
 const ToolBar = styled.div`
-    display: flex;
-    padding: 1em 0 2em 0;
+	display: flex;
+	padding: 1em 0 2em 0;
 `;
 
 const DateWrapper = styled.div`
-    align-items: center;
-    display: flex;
-    margin-left: auto;
+	align-items: center;
+	display: flex;
+	margin-left: auto;
 `;
 
 const DateNav = styled.div`margin-left: 1em;`;
@@ -27,131 +27,126 @@ const DateNav = styled.div`margin-left: 1em;`;
 const CurrentDate = styled.div`margin-right: 1em;`;
 
 const DateNavButton = styled.button`
-    background: ${props => (props.disabled ? '#eee' : 'none')};
-    border: 1px solid #eee;
-    border-right: none;
-    color: ${props => (props.disabled ? '#ccc' : '#333')};
-    cursor: ${props => (props.disabled ? 'normal' : 'pointer')};
-    box-shadow: none;
-    outline: none;
-    padding: 10px 20px;
-    transition: all 0.2s ease-in-out;
+	background: ${props => (props.disabled ? "#eee" : "none")};
+	border: 1px solid #eee;
+	border-right: none;
+	color: ${props => (props.disabled ? "#ccc" : "#333")};
+	cursor: ${props => (props.disabled ? "normal" : "pointer")};
+	box-shadow: none;
+	outline: none;
+	padding: 10px 20px;
+	transition: all 0.2s ease-in-out;
 
-    &:first-child {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-    }
+	&:first-child {
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+	}
 
-    &:last-child {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-        border-right: 1px solid #eee;
-    }
+	&:last-child {
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+		border-right: 1px solid #eee;
+	}
 
-    &:hover {
-        background: ${props => (props.disabled ? '#eee' : '#ff5f6d')};
-        color: ${props => (props.disabled ? '#ccc' : '#fff')};
-    }
+	&:hover {
+		background: ${props => (props.disabled ? "#eee" : "#ff5f6d")};
+		color: ${props => (props.disabled ? "#ccc" : "#fff")};
+	}
 `;
 
 class App extends React.Component {
-    static propTypes = {
-        history: React.PropTypes.object.isRequired,
-        data: React.PropTypes.object.isRequired
-    };
+	state = {
+		date: moment()
+	};
 
-    state = {
-        date: moment()
-    };
+	_logout = () => {
+		window.localStorage.removeItem("auth0IdToken");
+		window.location.reload();
+	};
 
-    _logout = () => {
-        window.localStorage.removeItem('auth0IdToken');
-        window.location.reload();
-    };
+	_isLoggedIn = () => {
+		return this.props.data.user;
+	};
 
-    _isLoggedIn = () => {
-        return this.props.data.user;
-    };
+	_goBack = () => {
+		this.setState({
+			date: this.state.date.subtract(1, "days")
+		});
+	};
 
-    _goBack = () => {
-        this.setState({
-            date: this.state.date.subtract(1, 'days')
-        });
-    };
+	_goForward = () => {
+		this.setState({
+			date: this.state.date.add(1, "days")
+		});
+	};
 
-    _goForward = () => {
-        this.setState({
-            date: this.state.date.add(1, 'days')
-        });
-    };
+	_goToToday = () => {
+		this.setState({
+			date: moment()
+		});
+	};
 
-    _goToToday = () => {
-        this.setState({
-            date: moment()
-        });
-    };
+	render() {
+		let content = <Welcome />;
 
-    render() {
-        let content = <Welcome />;
+		const today =
+			this.state.date.format("MMM Do YY") ===
+			moment().format("MMM Do YY");
 
-        const today =
-            this.state.date.format('MMM Do YY') ===
-            moment().format('MMM Do YY');
-
-        if (this._isLoggedIn()) {
-            content = (
-                <Container>
-                    <ToolBar>
-                        <AddEntry {...this.props} />
-                        <DateWrapper>
-                            <CurrentDate>
-                                {this.state.date.format('MMMM Do, YYYY')}
-                            </CurrentDate>
-                            <DateNav>
-                                <DateNavButton onClick={this._goBack}>
-                                    Prev
-                                </DateNavButton>
-                                <DateNavButton middle onClick={this._goToToday}>
-                                    Today
-                                </DateNavButton>
-                                <DateNavButton
-                                    disabled={today}
-                                    onClick={this._goForward}
-                                >
-                                    Next
-                                </DateNavButton>
-                            </DateNav>
-                        </DateWrapper>
-                    </ToolBar>
-                    <EntriesListWithData
-                        startDate={this.state.date.startOf('day').format()}
-                        endDate={this.state.date.endOf('day').format()}
-                        date={this.state.date}
-                        goToToday={this._goToToday}
-                    />
-                </Container>
-            );
-        }
-        return (
-            <div>
-                <Header
-                    isLoggedIn={this._isLoggedIn}
-                    handleLogout={this._logout}
-                />
-                {content}
-            </div>
-        );
-    }
+		if (this._isLoggedIn()) {
+			content = (
+				<Container>
+					<ToolBar>
+						<AddEntry {...this.props} />
+						<DateWrapper>
+							<CurrentDate>
+								{this.state.date.format("MMMM Do, YYYY")}
+							</CurrentDate>
+							<DateNav>
+								<DateNavButton onClick={this._goBack}>
+									Prev
+								</DateNavButton>
+								<DateNavButton middle onClick={this._goToToday}>
+									Today
+								</DateNavButton>
+								<DateNavButton
+									disabled={today}
+									onClick={this._goForward}
+								>
+									Next
+								</DateNavButton>
+							</DateNav>
+						</DateWrapper>
+					</ToolBar>
+					<EntriesListWithData
+						startDate={this.state.date.startOf("day").format()}
+						endDate={this.state.date.endOf("day").format()}
+						date={this.state.date}
+						goToToday={this._goToToday}
+					/>
+				</Container>
+			);
+		}
+		return (
+			<div>
+				<Header
+					isLoggedIn={this._isLoggedIn}
+					handleLogout={this._logout}
+				/>
+				{content}
+			</div>
+		);
+	}
 }
 
 const userQuery = gql`
-    query userQuery {
-        user {
-            id
-        }
-    }
+	query userQuery {
+		user {
+			id
+		}
+	}
 `;
 
-export default graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(
-    withRouter(App)
+export default graphql(userQuery, { options: { fetchPolicy: "network-only" } })(
+	withRouter(App)
 );
