@@ -29,7 +29,6 @@ class Timeline extends React.Component {
 	state = {};
 
 	render() {
-		console.log(this.state);
 		const { date, entries } = this.props;
 		if (entries.length) {
 			return (
@@ -42,6 +41,7 @@ class Timeline extends React.Component {
 								length={entries.length}
 								entry={entry}
 								last={key === 0}
+								{...this.props}
 							/>
 						)
 						.reverse()}

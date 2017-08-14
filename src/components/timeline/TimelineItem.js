@@ -3,6 +3,7 @@ import { gql, graphql, compose } from "react-apollo";
 import styled from "styled-components";
 import emoji from "react-easy-emoji";
 import moment from "moment";
+import { entriesListQuery } from "../EntriesList";
 import {
 	Item,
 	Head,
@@ -82,12 +83,12 @@ class TimelineItem extends React.Component {
 		this.props.deleteEntry({
 			variables: {
 				id: this.props.entry.id
-			}
+			},
+			refetchQueries: ["paginateEntries"]
 		});
 	};
 
 	render() {
-		console.log(this.props);
 		const { entry, last, selected } = this.props;
 		const { isEditing } = this.state;
 		let icon = emoji("💩");

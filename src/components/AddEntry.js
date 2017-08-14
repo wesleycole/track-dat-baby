@@ -81,13 +81,7 @@ class AddEntry extends React.Component {
 				time: this.state.time,
 				userId: this.props.data.user.id
 			},
-			update: (store, { data: { createEntry } }) => {
-				const data = store.readQuery({
-					query: entriesListQuery
-				});
-				data.user.entries.push.push(createEntry);
-				store.writeQuery({ query: entriesListQuery, data: data });
-			}
+			refetchQueries: ["paginateEntries"]
 		});
 
 		this.setState({
