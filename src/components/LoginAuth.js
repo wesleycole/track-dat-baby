@@ -21,7 +21,7 @@ class LoginAuth0 extends Component {
 		super(props);
 
 		this._lock = new Auth0Lock(clientId, domain, {
-			allowedConnections: ["google-oauth2", "facebook", "twitter"],
+			allowedConnections: ["google-oauth2", "facebook"],
 			allowShowPassword: true,
 			theme: {
 				logo: "http://twemoji.maxcdn.com/2/72x72/1f476.png",

@@ -1,12 +1,40 @@
 import React from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import { graphql, gql } from "react-apollo";
+import {
+	Container,
+	SignUpContainer,
+	FormContainer,
+	Logo,
+	Input,
+	SignUp
+} from "./styles";
+import emoji from "react-easy-emoji";
 
 class CreateUser extends React.Component {
 	state = {
 		emailAddress: "",
 		name: "",
 		emailSubscription: false
+	};
+
+	createUser = () => {
+		const variables = {
+			idToken: window.localStorage.getItem("auth0IdToken"),
+			emailAddress: this.state.emailAddress,
+			name: this.state.name,
+			emailSubscription: this.state.emailSubscription
+		};
+
+		this.props
+			.createUser({ variables })
+			.then(response => {
+				this.props.history.replace("/");
+			})
+			.catch(e => {
+				console.error(e);
+				this.props.history.replace("/");
+			});
 	};
 
 	render() {
@@ -30,64 +58,37 @@ class CreateUser extends React.Component {
 		}
 
 		return (
-			<div className="w-100 pa4 flex justify-center">
-				<div style={{ maxWidth: 400 }} className="">
-					<input
-						className="w-100 pa3 mv2"
-						value={this.state.emailAddress}
-						placeholder="Email"
-						onChange={e =>
-							this.setState({ emailAddress: e.target.value })}
-					/>
-					<input
-						className="w-100 pa3 mv2"
-						value={this.state.name}
-						placeholder="Name"
-						onChange={e => this.setState({ name: e.target.value })}
-					/>
-					<div>
-						<input
-							className="w-100 pa3 mv2"
-							value={this.state.emailSubscription}
-							type="checkbox"
+			<Container>
+				<SignUpContainer>
+					<Logo>
+						<span>{emoji("👶")}</span>
+						Sign Up
+						<p>
+							Looks like you are new here! Enter your name and
+							email address to get started.
+						</p>
+					</Logo>
+					<FormContainer>
+						<Input
+							value={this.state.emailAddress}
+							placeholder="Email"
 							onChange={e =>
-								this.setState({
-									emailSubscription: e.target.checked
-								})}
+								this.setState({ emailAddress: e.target.value })}
 						/>
-						<span>Subscribe to email notifications?</span>
-					</div>
-
-					{this.state.name &&
-						<button
-							className="pa3 bg-black-10 bn dim ttu pointer"
-							onClick={this.createUser}
-						>
-							Sign up
-						</button>}
-				</div>
-			</div>
+						<Input
+							value={this.state.name}
+							placeholder="Name"
+							onChange={e =>
+								this.setState({ name: e.target.value })}
+						/>
+						{this.state.name &&
+							this.state.emailAddress &&
+							<SignUp onClick={this.createUser}>Sign up</SignUp>}
+					</FormContainer>
+				</SignUpContainer>
+			</Container>
 		);
 	}
-
-	createUser = () => {
-		const variables = {
-			idToken: window.localStorage.getItem("auth0IdToken"),
-			emailAddress: this.state.emailAddress,
-			name: this.state.name,
-			emailSubscription: this.state.emailSubscription
-		};
-
-		this.props
-			.createUser({ variables })
-			.then(response => {
-				this.props.history.replace("/");
-			})
-			.catch(e => {
-				console.error(e);
-				this.props.history.replace("/");
-			});
-	};
 }
 
 const createUser = gql`

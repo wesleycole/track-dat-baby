@@ -1,5 +1,65 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+	align-items: center;
+	background: linear-gradient(to right, #ff5f6d, #ffc371);
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	justify-content: center;
+`;
+
+export const SignUpContainer = styled.div`
+	background: #fff;
+	border-radius: 3px;
+	padding: 30px;
+`;
+
+export const Logo = styled.h1`
+	font-size: 32px;
+	margin-bottom: 20px;
+	text-align: center;
+
+	span {
+		display: block;
+	}
+
+	p {
+		font-size: 18px;
+		font-weight: normal;
+		max-width: 400px;
+	}
+`;
+
+export const FormContainer = styled.div`min-width: 320px;`;
+
+export const Input = styled.input`
+	background: #eee;
+	border: none;
+	border-radius: 3px;
+	box-shadow: none;
+	box-sizing: border-box;
+	display: block;
+	font-size: 18px;
+	margin-bottom: 10px;
+	padding: 12px 10px;
+	width: 100%;
+`;
+
+export const SignUp = styled.button`
+	background: linear-gradient(to right, #ff5f6d, #ffc371);
+	border-radius: 3px;
+	box-shadow: none;
+	border: none;
+	box-sizing: border-box;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-size: 18px;
+	padding: 12px 10px;
+	width: 100%;
+`;
+
 export const TrackButton = styled.button`
 	background: linear-gradient(to right, #ff5f6d, #ffc371);
 	border: none;
