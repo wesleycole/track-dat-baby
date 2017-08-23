@@ -23,9 +23,9 @@ class EntriesList extends React.Component {
 			<Container>
 				<Timeline
 					{...this.props}
-					entries={this.props.data.user.entries}
+					entries={this.props.data.user.baby.entries}
 				/>
-				<Reports entries={this.props.data.user.entries} />
+				<Reports entries={this.props.data.user.baby.entries} />
 			</Container>
 		);
 	}
@@ -35,11 +35,14 @@ export const entriesListQuery = gql`
 	query paginateEntries($startDate: DateTime, $endDate: DateTime) {
 		user {
 			id
-			entries(filter: { time_lte: $endDate, time_gte: $startDate }) {
+			baby {
 				id
-				parentType
-				childType
-				time
+				entries(filter: { time_lte: $endDate, time_gte: $startDate }) {
+					id
+					parentType
+					childType
+					time
+				}
 			}
 		}
 	}

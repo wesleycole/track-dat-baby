@@ -86,7 +86,6 @@ class App extends React.Component {
 	};
 
 	render() {
-		console.log(this.props.data.user);
 		let content = <Welcome />;
 
 		const today =
@@ -139,14 +138,23 @@ class App extends React.Component {
 	}
 }
 
-const userQuery = gql`
-	query userQuery {
+const babyQuery = gql`
+	query babyQuery {
 		user {
 			id
+			baby {
+				id
+				entries {
+					id
+					parentType
+					childType
+					time
+				}
+			}
 		}
 	}
 `;
 
-export default graphql(userQuery, { options: { fetchPolicy: "network-only" } })(
+export default graphql(babyQuery, { options: { fetchPolicy: "network-only" } })(
 	withRouter(App)
 );

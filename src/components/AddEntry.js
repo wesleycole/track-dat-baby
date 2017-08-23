@@ -77,7 +77,7 @@ class AddEntry extends React.Component {
 				parentType: this.state.parentType,
 				childType: this.state.childType,
 				time: this.state.time,
-				userId: this.props.data.user.id
+				babyId: this.props.data.user.baby.id
 			},
 			refetchQueries: ["paginateEntries"]
 		});
@@ -93,7 +93,7 @@ class AddEntry extends React.Component {
 
 	render() {
 		const { parentType, childType } = this.state;
-
+		console.log(this.props);
 		let childOutput = "";
 		if (parentType === "diaper") {
 			childOutput = (
@@ -187,19 +187,19 @@ const addEntryMutation = gql`
 		$parentType: String!
 		$childType: String!
 		$time: DateTime
-		$userId: ID!
+		$babyId: ID!
 	) {
 		createEntry(
 			parentType: $parentType
 			childType: $childType
 			time: $time
-			userId: $userId
+			babyId: $babyId
 		) {
 			id
 			parentType
 			childType
 			time
-			user {
+			baby {
 				id
 			}
 		}
