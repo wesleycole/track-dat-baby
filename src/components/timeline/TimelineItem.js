@@ -51,7 +51,8 @@ class TimelineItem extends React.Component {
 				id: this.props.entry.id,
 				childType: this.state.childType,
 				time: this.state.time
-			}
+			},
+			refetchQueries: ["paginateEntries"]
 		});
 
 		this.setState({
