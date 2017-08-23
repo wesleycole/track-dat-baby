@@ -37,7 +37,10 @@ export const entriesListQuery = gql`
 			id
 			baby {
 				id
-				entries(filter: { time_lte: $endDate, time_gte: $startDate }) {
+				entries(
+					orderBy: time_ASC
+					filter: { time_lte: $endDate, time_gte: $startDate }
+				) {
 					id
 					parentType
 					childType

@@ -13,18 +13,16 @@ class Timeline extends React.Component {
 		if (entries.length) {
 			return (
 				<TimelineContainer>
-					{entries
-						.map((entry, key) =>
-							<TimelineItem
-								i={key}
-								key={entry.id}
-								length={entries.length}
-								entry={entry}
-								last={key === 0}
-								{...this.props}
-							/>
-						)
-						.reverse()}
+					{entries.map((entry, key) =>
+						<TimelineItem
+							i={key}
+							key={entry.id}
+							length={entries.length}
+							entry={entry}
+							last={key === 0}
+							{...this.props}
+						/>
+					)}
 				</TimelineContainer>
 			);
 		} else if (date.format("MM Do YY") !== moment().format("MM Do YY")) {
