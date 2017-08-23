@@ -143,8 +143,6 @@ const userQuery = gql`
 	query userQuery {
 		user {
 			id
-			baby
-			entries
 		}
 	}
 `;

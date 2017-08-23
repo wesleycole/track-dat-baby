@@ -29,7 +29,7 @@ class CreateUser extends React.Component {
 		this.props
 			.createUser({ variables })
 			.then(response => {
-				this.props.history.replace("/");
+				this.props.history.replace("/baby");
 			})
 			.catch(e => {
 				console.error(e);

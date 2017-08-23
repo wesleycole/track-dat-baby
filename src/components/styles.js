@@ -56,8 +56,27 @@ export const SignUp = styled.button`
 	cursor: pointer;
 	display: block;
 	font-size: 18px;
+	margin-top: ${props => (props.mt ? "20px" : "")};
 	padding: 12px 10px;
+	positoin: relative;
+	transition: all 0.2s ease-in-out;
 	width: 100%;
+
+	&:hover {
+		transform: scale(1.05);
+	}
+`;
+
+export const SkipLink = styled.a`
+	color: #ccc;
+	font-size: 14px;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in-out;
+
+	&:hover {
+		color: #ff5f6d;
+	}
 `;
 
 export const TrackButton = styled.button`

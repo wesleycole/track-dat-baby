@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
 import CreateUser from "./components/CreateUser";
+import CreateBaby from "./components/CreateBaby";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import {
 	ApolloClient,
@@ -43,6 +44,7 @@ ReactDOM.render(
 			<div>
 				<Route exact path="/" component={App} />
 				<Route path="/signup" component={CreateUser} />
+				<Route path="/baby" component={CreateBaby} />
 			</div>
 		</Router>
 	</ApolloProvider>,
