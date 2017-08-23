@@ -2,11 +2,9 @@ import React from "react";
 import { gql, graphql } from "react-apollo";
 import Modal from "react-modal";
 import emoji from "react-easy-emoji";
-import styled from "styled-components";
 import RadioGroup from "./form/RadioGroup";
 import TimePicker from "rc-time-picker";
 import moment from "moment";
-import { entriesListQuery } from "./EntriesList";
 import "rc-time-picker/assets/index.css";
 import {
 	ModalContent,

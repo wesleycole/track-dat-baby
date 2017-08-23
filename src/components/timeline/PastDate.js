@@ -1,6 +1,6 @@
 import React from "react";
 import emoji from "react-easy-emoji";
-import { NoEntries, Point, InlineButton } from "./styles";
+import { NoEntries, Point } from "./styles";
 
 const PastDate = props => {
 	return (

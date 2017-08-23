@@ -8,7 +8,6 @@ export const Container = styled.div`display: flex;`;
 
 class EntriesList extends React.Component {
 	render() {
-		console.log(this.props);
 		if (this.props.data.loading) {
 			return <p>Loading ...</p>;
 		}

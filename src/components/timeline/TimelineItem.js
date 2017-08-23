@@ -1,9 +1,7 @@
 import React from "react";
 import { gql, graphql, compose } from "react-apollo";
-import styled from "styled-components";
 import emoji from "react-easy-emoji";
 import moment from "moment";
-import { entriesListQuery } from "../EntriesList";
 import {
 	Item,
 	Head,
@@ -14,24 +12,6 @@ import {
 	EditLabel
 } from "./styles";
 import TimePicker from "rc-time-picker";
-
-const customStyles = {
-	content: {
-		border: "1px solid #eee",
-		boxShadow: "4px 4px 20px rgba(0,0,0,0.1)",
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		marginRight: "-50%",
-		padding: 0,
-		transform: "translate(-50%, -50%)",
-		width: 320
-	},
-	overlay: {
-		backgroundColor: "rgba(255, 255, 255, 0.7)"
-	}
-};
 
 class TimelineItem extends React.Component {
 	state = {
@@ -89,7 +69,7 @@ class TimelineItem extends React.Component {
 	};
 
 	render() {
-		const { entry, last, selected } = this.props;
+		const { entry, selected } = this.props;
 		const { isEditing } = this.state;
 		let icon = emoji("💩");
 

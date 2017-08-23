@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Header from "./Header";
 import AddEntry from "./AddEntry";
 import EntriesListWithData from "./EntriesList";
-import LoginAuth from "./LoginAuth";
 import Welcome from "./Welcome";
 import moment from "moment";
 
@@ -59,41 +58,42 @@ class App extends React.Component {
 		date: moment()
 	};
 
-	_logout = () => {
+	logout = () => {
 		window.localStorage.removeItem("auth0IdToken");
 		window.location.reload();
 	};
 
-	_isLoggedIn = () => {
+	isLoggedIn = () => {
 		return this.props.data.user;
 	};
 
-	_goBack = () => {
+	goBack = () => {
 		this.setState({
 			date: this.state.date.subtract(1, "days")
 		});
 	};
 
-	_goForward = () => {
+	goForward = () => {
 		this.setState({
 			date: this.state.date.add(1, "days")
 		});
 	};
 
-	_goToToday = () => {
+	goToToday = () => {
 		this.setState({
 			date: moment()
 		});
 	};
 
 	render() {
+		console.log(this.props.data.user);
 		let content = <Welcome />;
 
 		const today =
 			this.state.date.format("MMM Do YY") ===
 			moment().format("MMM Do YY");
 
-		if (this._isLoggedIn()) {
+		if (this.isLoggedIn()) {
 			content = (
 				<Container>
 					<ToolBar>
@@ -103,15 +103,15 @@ class App extends React.Component {
 								{this.state.date.format("MMMM Do, YYYY")}
 							</CurrentDate>
 							<DateNav>
-								<DateNavButton onClick={this._goBack}>
+								<DateNavButton onClick={this.goBack}>
 									Prev
 								</DateNavButton>
-								<DateNavButton middle onClick={this._goToToday}>
+								<DateNavButton middle onClick={this.goToToday}>
 									Today
 								</DateNavButton>
 								<DateNavButton
 									disabled={today}
-									onClick={this._goForward}
+									onClick={this.goForward}
 								>
 									Next
 								</DateNavButton>
@@ -122,7 +122,7 @@ class App extends React.Component {
 						startDate={this.state.date.startOf("day").format()}
 						endDate={this.state.date.endOf("day").format()}
 						date={this.state.date}
-						goToToday={this._goToToday}
+						goToToday={this.goToToday}
 					/>
 				</Container>
 			);
@@ -130,8 +130,8 @@ class App extends React.Component {
 		return (
 			<div>
 				<Header
-					isLoggedIn={this._isLoggedIn}
-					handleLogout={this._logout}
+					isLoggedIn={this.isLoggedIn}
+					handleLogout={this.logout}
 				/>
 				{content}
 			</div>
@@ -143,6 +143,8 @@ const userQuery = gql`
 	query userQuery {
 		user {
 			id
+			baby
+			entries
 		}
 	}
 `;
