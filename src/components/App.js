@@ -1,12 +1,15 @@
 import React from "react";
+import Auth0Lock from "auth0-lock";
 import { graphql, gql } from "react-apollo";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
 import AddEntry from "./AddEntry";
 import EntriesListWithData from "./EntriesList";
-import Welcome from "./Welcome";
 import moment from "moment";
+
+const clientId = "O4r7bgASfCN-V4eeGCl3v5C1zzP-7mRn";
+const domain = "trackdatbaby.auth0.com";
 
 const Container = styled.div`padding: 1em;`;
 
@@ -54,9 +57,25 @@ const DateNavButton = styled.button`
 `;
 
 class App extends React.Component {
-	state = {
-		date: moment()
-	};
+	constructor() {
+		super();
+		this._lock = new Auth0Lock(clientId, domain, {
+			allowedConnections: [
+				"Username-Password-Authentication",
+				"google-oauth2",
+				"facebook"
+			],
+			allowShowPassword: true,
+			theme: {
+				logo: "http://twemoji.maxcdn.com/2/72x72/1f476.png",
+				primaryColor: "#ff5f6d"
+			}
+		});
+
+		this.state = {
+			date: moment()
+		};
+	}
 
 	logout = () => {
 		window.localStorage.removeItem("auth0IdToken");
@@ -85,15 +104,24 @@ class App extends React.Component {
 		});
 	};
 
-	render() {
-		let content = <Welcome />;
+	componentDidUpdate() {
+		if (!this.isLoggedIn()) {
+			console.log("is not logged in");
+			this._lock.show();
+		}
+	}
 
+	render() {
 		const today =
 			this.state.date.format("MMM Do YY") ===
 			moment().format("MMM Do YY");
 
-		if (this.isLoggedIn()) {
-			content = (
+		return (
+			<div>
+				<Header
+					isLoggedIn={this.isLoggedIn}
+					handleLogout={this.logout}
+				/>
 				<Container>
 					<ToolBar>
 						<AddEntry {...this.props} />
@@ -117,22 +145,15 @@ class App extends React.Component {
 							</DateNav>
 						</DateWrapper>
 					</ToolBar>
-					<EntriesListWithData
-						startDate={this.state.date.startOf("day").format()}
-						endDate={this.state.date.endOf("day").format()}
-						date={this.state.date}
-						goToToday={this.goToToday}
-					/>
+					{this.isLoggedIn() && (
+						<EntriesListWithData
+							startDate={this.state.date.startOf("day").format()}
+							endDate={this.state.date.endOf("day").format()}
+							date={this.state.date}
+							goToToday={this.goToToday}
+						/>
+					)}
 				</Container>
-			);
-		}
-		return (
-			<div>
-				<Header
-					isLoggedIn={this.isLoggedIn}
-					handleLogout={this.logout}
-				/>
-				{content}
 			</div>
 		);
 	}

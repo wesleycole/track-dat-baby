@@ -6,30 +6,25 @@ import styled from "styled-components";
 
 export const Container = styled.div`display: flex;`;
 
-class EntriesList extends React.Component {
-	render() {
-		if (this.props.data.loading) {
-			return <p>Loading ...</p>;
-		}
-		if (this.props.data.error) {
-			return (
-				<p>
-					{this.props.data.error.message}
-				</p>
-			);
-		}
-
+const EntriesList = props => {
+	if (props.data.loading) {
+		return <p>Loading ...</p>;
+	}
+	if (props.data.error) {
 		return (
-			<Container>
-				<Timeline
-					{...this.props}
-					entries={this.props.data.user.baby.entries}
-				/>
-				<Reports entries={this.props.data.user.baby.entries} />
-			</Container>
+			<p>
+				{props.data.error.message}
+			</p>
 		);
 	}
-}
+
+	return (
+		<Container>
+			<Timeline {...props} entries={props.data.user.baby.entries} />
+			<Reports entries={props.data.user.baby.entries} />
+		</Container>
+	);
+};
 
 export const entriesListQuery = gql`
 	query paginateEntries($startDate: DateTime, $endDate: DateTime) {
