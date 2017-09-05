@@ -93,7 +93,6 @@ class AddEntry extends React.Component {
 
 	render() {
 		const { parentType, childType } = this.state;
-		console.log(this.props);
 		let childOutput = "";
 		if (parentType === "diaper") {
 			childOutput = (

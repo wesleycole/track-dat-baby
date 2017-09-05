@@ -60,15 +60,16 @@ class App extends React.Component {
 	constructor() {
 		super();
 		this._lock = new Auth0Lock(clientId, domain, {
-			allowedConnections: [
-				"Username-Password-Authentication",
-				"google-oauth2",
-				"facebook"
-			],
+			allowedConnections: ["google-oauth2", "facebook"],
 			allowShowPassword: true,
 			theme: {
 				logo: "http://twemoji.maxcdn.com/2/72x72/1f476.png",
 				primaryColor: "#ff5f6d"
+			},
+			closable: false,
+			languageDictionary: {
+				emailInputPlaceholder: "something@youremail.com",
+				title: "Log me in"
 			}
 		});
 
@@ -104,9 +105,15 @@ class App extends React.Component {
 		});
 	};
 
+	componentDidMount() {
+		this._lock.on("authenticated", authResult => {
+			window.localStorage.setItem("auth0IdToken", authResult.idToken);
+			this.props.history.push(`/signup`);
+		});
+	}
+
 	componentDidUpdate() {
 		if (!this.isLoggedIn()) {
-			console.log("is not logged in");
 			this._lock.show();
 		}
 	}
@@ -119,6 +126,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<Header
+					user={this.props.data.user}
 					isLoggedIn={this.isLoggedIn}
 					handleLogout={this.logout}
 				/>
@@ -163,6 +171,8 @@ const babyQuery = gql`
 	query babyQuery {
 		user {
 			id
+			name
+			emailAddress
 			baby {
 				id
 				entries {

@@ -82,8 +82,9 @@ class CreateUser extends React.Component {
 								this.setState({ name: e.target.value })}
 						/>
 						{this.state.name &&
-							this.state.emailAddress &&
-							<SignUp onClick={this.createUser}>Sign up</SignUp>}
+						this.state.emailAddress && (
+							<SignUp onClick={this.createUser}>Sign up</SignUp>
+						)}
 					</FormContainer>
 				</SignUpContainer>
 			</Container>
