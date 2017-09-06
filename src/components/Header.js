@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Gravatar from "react-gravatar";
 import styled from "styled-components";
 import emoji from "react-easy-emoji";
 
@@ -28,9 +29,11 @@ const Buttons = styled.div`
 `;
 
 const AccountButton = styled(Link)`
-	color: #000;
+	align-items: center;
+	background: ${props => (props.isAccountPage ? "#ff5f6d" : "#fff")};
+	color: ${props => (props.isAccountPage ? "#fff" : "#000")};
 	cursor: pointer;
-	display: inline-block;
+	display: flex;
 	padding: 1em;
 	text-decoration: none;
 	transition: all 0.2s ease-in-out;
@@ -39,6 +42,11 @@ const AccountButton = styled(Link)`
 		background: #ff5f6d;
 		color: #fff;
 	}
+`;
+
+const AccountPhoto = styled(Gravatar)`
+	border-radius: 100%;
+	margin-right: 0.5em;
 `;
 
 const LogoutButton = styled.button`
@@ -68,7 +76,15 @@ const Header = props => {
 				<SiteTitleText>Track Dat Baby</SiteTitleText>
 			</SiteTitle>
 			<Buttons>
-				<AccountButton to="/account">Your Account</AccountButton>
+				<AccountButton to="/account">
+					{props.user && (
+						<AccountPhoto
+							email={props.user.emailAddress}
+							size={30}
+							rating="pg"
+						/>
+					)}Your Account
+				</AccountButton>
 				<LogoutButton onClick={props.handleLogout}>
 					Log out
 				</LogoutButton>
