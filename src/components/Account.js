@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, gql } from "react-apollo";
 import { withRouter } from "react-router-dom";
 import Header from "./Header";
+import Loading from "./Loading";
 import styled from "styled-components";
 import { FormContainer, Input, SignUp } from "./styles";
 
@@ -22,6 +23,11 @@ class Account extends React.Component {
 	state = {
 		name: "",
 		emailAddress: ""
+	};
+
+	logout = () => {
+		window.localStorage.removeItem("auth0IdToken");
+		this.props.history.push(`/`);
 	};
 
 	isLoggedIn = () => {
@@ -45,18 +51,9 @@ class Account extends React.Component {
 			});
 	};
 
-	componentDidMount() {
-		if (this.props.data.user) {
-			this.setState({
-				name: this.props.data.user.name,
-				emailAddress: this.props.data.user.emailAddress
-			});
-		}
-	}
-
 	render() {
 		if (this.props.data.loading) {
-			return <p>Loading ...</p>;
+			return <p>Loading...</p>;
 		}
 
 		if (this.props.data.error) {
@@ -75,13 +72,13 @@ class Account extends React.Component {
 					<h1>Your Account</h1>
 					<FormContainer>
 						<Input
-							value={this.state.emailAddress}
+							value=""
 							placeholder="Email"
 							onChange={e =>
 								this.setState({ emailAddress: e.target.value })}
 						/>
 						<Input
-							value={this.state.name}
+							value=""
 							placeholder="Name"
 							onChange={e =>
 								this.setState({ name: e.target.value })}

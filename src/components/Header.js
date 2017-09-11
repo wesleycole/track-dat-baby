@@ -68,13 +68,14 @@ const LogoutButton = styled.button`
 `;
 
 const Header = props => {
-	console.log(props);
 	return (
 		<SiteHeader>
-			<SiteTitle>
-				{emoji("👶")}
-				<SiteTitleText>Track Dat Baby</SiteTitleText>
-			</SiteTitle>
+			<Link to="/">
+				<SiteTitle>
+					{emoji("👶")}
+					<SiteTitleText>Track Dat Baby</SiteTitleText>
+				</SiteTitle>
+			</Link>
 			<Buttons>
 				<AccountButton to="/account">
 					{props.user && (

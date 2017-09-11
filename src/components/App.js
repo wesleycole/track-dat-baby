@@ -35,6 +35,7 @@ const DateNavButton = styled.button`
 	color: ${props => (props.disabled ? "#ccc" : "#333")};
 	cursor: ${props => (props.disabled ? "normal" : "pointer")};
 	box-shadow: none;
+	font-size: 1em;
 	outline: none;
 	padding: 10px 20px;
 	transition: all 0.2s ease-in-out;

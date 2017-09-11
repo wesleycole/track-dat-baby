@@ -44,7 +44,6 @@ class Baby extends React.Component {
 	};
 
 	render() {
-		console.log(this.props);
 		let buttonValue = "Skip and Start Tracking";
 
 		if (this.state.name || this.state.birthday || this.state.sex) {

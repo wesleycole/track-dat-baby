@@ -86,6 +86,7 @@ export const TrackButton = styled.button`
 	box-shadow: none;
 	color: #fff;
 	cursor: pointer;
+	font-size: 1em;
 	font-weight: bold;
 	letter-spacing: 1px;
 	padding: 10px 20px;
