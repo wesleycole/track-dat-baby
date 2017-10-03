@@ -13,7 +13,7 @@ import {
 import "./index.css";
 
 const networkInterface = createNetworkInterface({
-	uri: "https://api.graph.cool/simple/v1/cj5olqdtogqbu0160ze47jbkv"
+	uri: process.env.REACT_APP_ENDPOINT
 });
 
 // use the auth0IdToken in localStorage for authorized requests
