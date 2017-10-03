@@ -2,7 +2,6 @@ import React from "react";
 import { graphql, gql } from "react-apollo";
 import { withRouter } from "react-router-dom";
 import Header from "./Header";
-import Loading from "./Loading";
 import styled from "styled-components";
 import { FormContainer, Input, SignUp } from "./styles";
 
@@ -12,11 +11,6 @@ const SettingsContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	padding: 4em 0;
-`;
-
-const SettingsForm = styled.form`
-	display: block;
-	width: 540px;
 `;
 
 class Account extends React.Component {

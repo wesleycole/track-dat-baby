@@ -8,8 +8,8 @@ import AddEntry from "./AddEntry";
 import EntriesListWithData from "./EntriesList";
 import moment from "moment";
 
-const clientId = "O4r7bgASfCN-V4eeGCl3v5C1zzP-7mRn";
-const domain = "trackdatbaby.auth0.com";
+const clientId = process.env.REACT_APP_AUTH0_ID;
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 
 const Container = styled.div`padding: 1em;`;
 
@@ -60,6 +60,7 @@ const DateNavButton = styled.button`
 class App extends React.Component {
 	constructor() {
 		super();
+
 		this._lock = new Auth0Lock(clientId, domain, {
 			allowedConnections: ["google-oauth2", "facebook"],
 			allowShowPassword: true,

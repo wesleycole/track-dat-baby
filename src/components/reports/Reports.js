@@ -71,42 +71,49 @@ const Reports = props => {
 		if (entry.parentType === "diaper") {
 			return entry;
 		}
+		return null;
 	}).length;
 
 	const numFeeds = entries.filter(entry => {
 		if (entry.parentType === "feed") {
 			return entry;
 		}
+		return null;
 	}).length;
 
 	const numPoops = entries.filter(entry => {
 		if (entry.childType === "poop") {
 			return entry;
 		}
+		return null;
 	}).length;
 
 	const numPees = entries.filter(entry => {
 		if (entry.childType === "pee") {
 			return entry;
 		}
+		return null;
 	}).length;
 
 	const numBoth = entries.filter(entry => {
 		if (entry.childType === "both") {
 			return entry;
 		}
+		return null;
 	}).length;
 
 	const numBreast = entries.filter(entry => {
 		if (entry.childType === "breast") {
 			return entry;
 		}
+		return null;
 	}).length;
 
 	const numBottle = entries.filter(entry => {
 		if (entry.childType === "bottle") {
 			return entry;
 		}
+		return null;
 	}).length;
 
 	return (
@@ -140,9 +147,7 @@ const Reports = props => {
 					<ParentContainer>
 						<ParentCount>
 							{numFeeds}
-							<CountLabel>
-								{emoji("🍼")} Feeds
-							</CountLabel>
+							<CountLabel>{emoji("🍼")} Feeds</CountLabel>
 						</ParentCount>
 						<ChildContainer>
 							<ChildCount>
