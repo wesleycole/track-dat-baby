@@ -2,68 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import emoji from "react-easy-emoji";
 
-const Container = styled.div`width: 60%;`;
-
-const Counts = styled.div`
-	display: flex;
-	width: 100%;
-`;
-
-const Count = styled.div`
-	align-items: center;
-	border: 1px solid #eee;
-	border-radius: 3px;
-	color: #333;
-	display: flex;
-	font-size: 64px;
-	font-weight: bold;
-	justify-content: center;
-	margin-right: 0.5em;
-	width: 50%;
-
-	&:last-child {
-		margin-right: 0;
-	}
-`;
-
-const CountLabel = styled.span`
-	color: #ccc;
-	display: block;
-	font-size: 14px;
-	text-transform: uppercase;
-`;
-
-const ParentContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 100%;
-`;
-
-const ChildContainer = styled.div`
-	align-items: center;
-	border-top: 1px solid #eee;
-	display: flex;
-	justify-content: space-between;
-`;
-
-const ChildCount = styled.div`
-	border-right: 1px solid #eee;
-	flex: 1;
-	font-size: 20px;
-	padding: 1em;
-	text-align: center;
-
-	&:last-child {
-		border-right: none;
-	}
-`;
-
-const ParentCount = styled.div`
-	padding: 0.5em;
-	text-align: center;
-`;
-
 const Reports = props => {
 	const { entries } = props;
 
@@ -165,5 +103,67 @@ const Reports = props => {
 		</Container>
 	);
 };
+
+const Container = styled.div`width: 60%;`;
+
+const Counts = styled.div`
+	display: flex;
+	width: 100%;
+`;
+
+const Count = styled.div`
+	align-items: center;
+	border: 1px solid #eee;
+	border-radius: 3px;
+	color: #333;
+	display: flex;
+	font-size: 64px;
+	font-weight: bold;
+	justify-content: center;
+	margin-right: 0.5em;
+	width: 50%;
+
+	&:last-child {
+		margin-right: 0;
+	}
+`;
+
+const CountLabel = styled.span`
+	color: #ccc;
+	display: block;
+	font-size: 14px;
+	text-transform: uppercase;
+`;
+
+const ParentContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+`;
+
+const ChildContainer = styled.div`
+	align-items: center;
+	border-top: 1px solid #eee;
+	display: flex;
+	justify-content: space-between;
+`;
+
+const ChildCount = styled.div`
+	border-right: 1px solid #eee;
+	flex: 1;
+	font-size: 20px;
+	padding: 1em;
+	text-align: center;
+
+	&:last-child {
+		border-right: none;
+	}
+`;
+
+const ParentCount = styled.div`
+	padding: 0.5em;
+	text-align: center;
+`;
 
 export default Reports;

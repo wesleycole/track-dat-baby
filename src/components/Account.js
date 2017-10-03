@@ -5,14 +5,6 @@ import Header from "./Header";
 import styled from "styled-components";
 import { FormContainer, Input, SignUp } from "./styles";
 
-const SettingsContainer = styled.div`
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 4em 0;
-`;
-
 class Account extends React.Component {
 	state = {
 		name: "",
@@ -84,6 +76,14 @@ class Account extends React.Component {
 		);
 	}
 }
+
+const SettingsContainer = styled.div`
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 4em 0;
+`;
 
 const updateUser = gql`
 	mutation($id: ID!, $name: String!, $emailAddress: String!) {

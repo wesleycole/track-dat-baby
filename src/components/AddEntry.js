@@ -17,24 +17,6 @@ import {
 	TrackButton
 } from "./styles";
 
-const customStyles = {
-	content: {
-		border: "1px solid #eee",
-		boxShadow: "4px 4px 20px rgba(0,0,0,0.1)",
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		marginRight: "-50%",
-		padding: 0,
-		transform: "translate(-50%, -50%)",
-		width: 320
-	},
-	overlay: {
-		backgroundColor: "rgba(255, 255, 255, 0.7)"
-	}
-};
-
 class AddEntry extends React.Component {
 	state = {
 		modalIsOpen: false,
@@ -180,6 +162,24 @@ class AddEntry extends React.Component {
 		);
 	}
 }
+
+const customStyles = {
+	content: {
+		border: "1px solid #eee",
+		boxShadow: "4px 4px 20px rgba(0,0,0,0.1)",
+		top: "50%",
+		left: "50%",
+		right: "auto",
+		bottom: "auto",
+		marginRight: "-50%",
+		padding: 0,
+		transform: "translate(-50%, -50%)",
+		width: 320
+	},
+	overlay: {
+		backgroundColor: "rgba(255, 255, 255, 0.7)"
+	}
+};
 
 const addEntryMutation = gql`
 	mutation createEntry(

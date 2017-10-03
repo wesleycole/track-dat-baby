@@ -11,52 +11,6 @@ import moment from "moment";
 const clientId = process.env.REACT_APP_AUTH0_ID;
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 
-const Container = styled.div`padding: 1em;`;
-
-const ToolBar = styled.div`
-	display: flex;
-	padding: 1em 0 2em 0;
-`;
-
-const DateWrapper = styled.div`
-	align-items: center;
-	display: flex;
-	margin-left: auto;
-`;
-
-const DateNav = styled.div`margin-left: 1em;`;
-
-const CurrentDate = styled.div`margin-right: 1em;`;
-
-const DateNavButton = styled.button`
-	background: ${props => (props.disabled ? "#eee" : "none")};
-	border: 1px solid #eee;
-	border-right: none;
-	color: ${props => (props.disabled ? "#ccc" : "#333")};
-	cursor: ${props => (props.disabled ? "normal" : "pointer")};
-	box-shadow: none;
-	font-size: 1em;
-	outline: none;
-	padding: 10px 20px;
-	transition: all 0.2s ease-in-out;
-
-	&:first-child {
-		border-top-left-radius: 3px;
-		border-bottom-left-radius: 3px;
-	}
-
-	&:last-child {
-		border-top-right-radius: 3px;
-		border-bottom-right-radius: 3px;
-		border-right: 1px solid #eee;
-	}
-
-	&:hover {
-		background: ${props => (props.disabled ? "#eee" : "#ff5f6d")};
-		color: ${props => (props.disabled ? "#ccc" : "#fff")};
-	}
-`;
-
 class App extends React.Component {
 	constructor() {
 		super();
@@ -168,6 +122,52 @@ class App extends React.Component {
 		);
 	}
 }
+
+const Container = styled.div`padding: 1em;`;
+
+const ToolBar = styled.div`
+	display: flex;
+	padding: 1em 0 2em 0;
+`;
+
+const DateWrapper = styled.div`
+	align-items: center;
+	display: flex;
+	margin-left: auto;
+`;
+
+const DateNav = styled.div`margin-left: 1em;`;
+
+const CurrentDate = styled.div`margin-right: 1em;`;
+
+const DateNavButton = styled.button`
+	background: ${props => (props.disabled ? "#eee" : "none")};
+	border: 1px solid #eee;
+	border-right: none;
+	color: ${props => (props.disabled ? "#ccc" : "#333")};
+	cursor: ${props => (props.disabled ? "normal" : "pointer")};
+	box-shadow: none;
+	font-size: 1em;
+	outline: none;
+	padding: 10px 20px;
+	transition: all 0.2s ease-in-out;
+
+	&:first-child {
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+	}
+
+	&:last-child {
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+		border-right: 1px solid #eee;
+	}
+
+	&:hover {
+		background: ${props => (props.disabled ? "#eee" : "#ff5f6d")};
+		color: ${props => (props.disabled ? "#ccc" : "#fff")};
+	}
+`;
 
 const babyQuery = gql`
 	query babyQuery {

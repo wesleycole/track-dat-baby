@@ -4,6 +4,33 @@ import Gravatar from "react-gravatar";
 import styled from "styled-components";
 import emoji from "react-easy-emoji";
 
+const Header = props => {
+	return (
+		<SiteHeader>
+			<Link to="/">
+				<SiteTitle>
+					{emoji("👶")}
+					<SiteTitleText>Track Dat Baby</SiteTitleText>
+				</SiteTitle>
+			</Link>
+			<Buttons>
+				<AccountButton to="/account">
+					{props.user && (
+						<AccountPhoto
+							email={props.user.emailAddress}
+							size={30}
+							rating="pg"
+						/>
+					)}Your Account
+				</AccountButton>
+				<LogoutButton onClick={props.handleLogout}>
+					Log out
+				</LogoutButton>
+			</Buttons>
+		</SiteHeader>
+	);
+};
+
 const SiteHeader = styled.header`
 	align-items: center;
 	border-bottom: 1px solid #eee;
@@ -66,32 +93,5 @@ const LogoutButton = styled.button`
 		color: #fff;
 	}
 `;
-
-const Header = props => {
-	return (
-		<SiteHeader>
-			<Link to="/">
-				<SiteTitle>
-					{emoji("👶")}
-					<SiteTitleText>Track Dat Baby</SiteTitleText>
-				</SiteTitle>
-			</Link>
-			<Buttons>
-				<AccountButton to="/account">
-					{props.user && (
-						<AccountPhoto
-							email={props.user.emailAddress}
-							size={30}
-							rating="pg"
-						/>
-					)}Your Account
-				</AccountButton>
-				<LogoutButton onClick={props.handleLogout}>
-					Log out
-				</LogoutButton>
-			</Buttons>
-		</SiteHeader>
-	);
-};
 
 export default Header;
